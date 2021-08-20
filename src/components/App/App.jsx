@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-import {HashRouter, Route} from 'react-redux';
+import {HashRouter, Route} from 'react-router-dom';
 import FormItem from '../FormItem/FormItem'
 function App() {
 
