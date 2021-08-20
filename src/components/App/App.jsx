@@ -13,10 +13,51 @@ function App() {
       </header>
 
       <HashRouter>
-      <Route path="/feeling"><FormItem question="How are you feeling?" type="text" required={true} /></Route>
-      <Route path="/understanding"></Route>
-      <Route path="/supported"></Route>
-      <Route path="/comments"></Route>
+      <Route path="/feeling">
+        <FormItem 
+          question="How are you feeling?" 
+          type="number" 
+          required={true}
+          next="/understanding"  
+          reducer="ADD_FEELING"
+        />
+        </Route>
+
+      <Route path="/understanding">
+      <FormItem 
+        question="How well are you understanding the content?" 
+        type="number" 
+        required={true} 
+        next="/supported"
+        reducer="ADD_UNDERSTANDING"
+        />
+      </Route>
+
+      <Route path="/supported">
+      <FormItem 
+        question="How well are you being supported?" 
+        type="number" 
+        required={true} 
+        next="/comments"
+        reducer="ADD_SUPPORTED"
+      />
+      </Route>
+
+      <Route path="/comments">
+      <FormItem 
+        question="How well are you understanding the content?" 
+        type="text" 
+        required={false} 
+        next="/review"
+        reducer="ADD_COMMENTS"
+      />
+      </Route>
+
+
+      <Route path="/review">
+
+      </Route>
+
 
       </HashRouter>
 
