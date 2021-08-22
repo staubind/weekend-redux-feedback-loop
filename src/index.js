@@ -10,27 +10,48 @@ import logger from 'redux-logger'
 
 // reducers
 const feeling = (state = 0, action) => {
-    if (action.type === 'ADD_FEELING') {
-        return action.payload;
+    // if (action.type === 'ADD_FEELING') {
+    //     return action.payload;
+    // }
+    // if (action.type === 'CLEAR') {
+    //     return 0;
+    // }
+    switch (action.type) {
+        case ('ADD_FEELING'):
+            return action.payload;
+        case ('CLEAR'):
+            return 0;
     }
     return state;
 }
+
 const understanding = (state = 0, action) => {
-    if (action.type === 'ADD_UNDERSTANDING') {
-        return action.payload;
-    }
+    switch (action.type) {
+        case ('ADD_UNDERSTANDING'):
+            return action.payload;
+        case ('CLEAR'):
+            return 0;
+    };
     return state;
 }
-const supported = (state = 0, action) => {
-    if (action.type === 'ADD_SUPPORTED') {
-        return action.payload;
-    }
+
+const support = (state = 0, action) => {
+    switch (action.type) {
+        case ('ADD_SUPPORT'):
+            return action.payload;
+        case ('CLEAR'):
+            return 0;
+    };
     return state;
 }
+
 const comments = (state = '', action) => {
-    if (action.type === 'ADD_COMMENTS') {
-        return action.payload;
-    }
+    switch (action.type) {
+        case ('ADD_COMMENTS'):
+            return action.payload;
+        case ('CLEAR'):
+            return 0;
+    };
     return state;
 }
 
@@ -39,7 +60,7 @@ const store = createStore(
         //reducers
         feeling,
         understanding,
-        supported,
+        support,
         comments
     }),
     applyMiddleware(logger)
