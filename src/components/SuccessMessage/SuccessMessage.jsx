@@ -1,5 +1,6 @@
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import { Button } from '@material-ui/core'
 
 function SuccessMessage() {
     const history = useHistory();
@@ -7,12 +8,12 @@ function SuccessMessage() {
     return (
         <>
             <h1>Thank You!</h1>
-            <button onClick={() => {
+            <Button onClick={() => {
                 dispatch({
                     type: 'CLEAR'
                 });
                 history.push('/feeling');
-            }}>Leave New Feedback</button>
+            }}>Leave New Feedback</Button>
         </>
     );
 };
