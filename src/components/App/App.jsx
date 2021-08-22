@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-import {HashRouter, Route} from 'react-router-dom';
+import {HashRouter, Route, Link} from 'react-router-dom';
 import FormItem from '../FormItem/FormItem';
 import Review from '../Review/Review';
 // import {useHistory} from 'react-router-dom'
 import SuccessMessage from '../SuccessMessage/SuccessMessage'
+import { Button } from '@material-ui/core'
 
 function App() {
 
@@ -35,8 +36,13 @@ function App() {
         <h1 className='App-title'>Feedback!</h1>
         <h4>Don't forget it!</h4>
       </header>
+      <HashRouter>
 
-    <HashRouter>
+      <Route path="/" exact>
+      <h3>Would You Mind Giving Us Some Feedback?</h3>
+      <Link to="/feeling"><Button>Offer Feedback</Button></Link>
+      </Route>
+
       <Route path="/feeling">
         <FormItem 
           question="How are you feeling?" 
