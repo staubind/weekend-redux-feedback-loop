@@ -1,6 +1,7 @@
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';
+import { Button } from '@material-ui/core'
 
 function FormItem({ question, type, required, next, reducer, back}) {
     const dispatch = useDispatch();
@@ -19,7 +20,8 @@ function FormItem({ question, type, required, next, reducer, back}) {
 
     return (
         <>
-            {back && <button onClick={() => {history.push(back)}}>BACK</button>}
+            {back && <Button variant="outlined" onClick={() => {history.push(back)}}>BACK</Button>}
+            
             <form onSubmit={evt => submitItem(evt)}>
                 <h2>{question}</h2>
                 <input 
@@ -29,10 +31,9 @@ function FormItem({ question, type, required, next, reducer, back}) {
                 onChange={(evt) => {
                     setInput(evt.target.value);
                 }}
-
             />
 
-                <input type="submit" value="NEXT" />
+                <Button type="submit" variant="contained">NEXT</Button>
             </form>
         </>
     );
