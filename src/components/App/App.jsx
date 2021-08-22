@@ -54,6 +54,7 @@ function App() {
           required={true} 
           next="/support"
           reducer="ADD_UNDERSTANDING"
+          back="/feeling"
         />
       </Route>
 
@@ -64,6 +65,7 @@ function App() {
           required={true} 
           next="/comments"
           reducer="ADD_SUPPORT"
+          back="understanding"
         />
       </Route>
 
@@ -74,6 +76,7 @@ function App() {
           required={false} 
           next="/review"
           reducer="ADD_COMMENTS"
+          back="support"
         />
       </Route>
 

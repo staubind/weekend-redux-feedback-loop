@@ -2,7 +2,7 @@ import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {useState} from 'react';
 
-function FormItem({ question, type, required, next, reducer}) {
+function FormItem({ question, type, required, next, reducer, back}) {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -18,20 +18,23 @@ function FormItem({ question, type, required, next, reducer}) {
     }
 
     return (
-        <form onSubmit={evt => submitItem(evt)}>
-            <h2>{question}</h2>
-            <input 
-            type={type} 
-            required={required}
-            value={input}
-            onChange={(evt) => {
-                setInput(evt.target.value);
-            }}
+        <>
+            {back && <button onClick={() => {history.push(back)}}>BACK</button>}
+            <form onSubmit={evt => submitItem(evt)}>
+                <h2>{question}</h2>
+                <input 
+                type={type} 
+                required={required}
+                value={input}
+                onChange={(evt) => {
+                    setInput(evt.target.value);
+                }}
 
-        />
+            />
 
-            <input type="submit" value="NEXT" />
-        </form>
+                <input type="submit" value="NEXT" />
+            </form>
+        </>
     );
 };
 
