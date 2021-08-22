@@ -2,8 +2,32 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import {HashRouter, Route} from 'react-router-dom';
-import FormItem from '../FormItem/FormItem'
+import FormItem from '../FormItem/FormItem';
+import Review from '../Review/Review';
+// import {useHistory} from 'react-router-dom'
+import SuccessMessage from '../SuccessMessage/SuccessMessage'
+
 function App() {
+
+  // const history = useHistory();
+
+  const submitFeedback = (feedbackData) => {
+    console.log('in submitFeedback just before axios. feedback is: ', feedbackData);
+    axios({
+      method: 'POST',
+      url: '/feedback',
+      data: feedbackData
+  }).then(response => {
+    console.log('Successfully posted to db');
+    // move us along to the SUBMISSION SUCCESS page
+    // console.log('history: ', history);
+    // confused why I can't do the switch with history here.
+    // history.push('/submitted');
+  }).catch(error => {
+    console.log('Failed to POST: ', error);
+    alert('Failed to Post. See console for details.');
+  })
+  }
 
   return (
     <div className='App'>
@@ -12,7 +36,7 @@ function App() {
         <h4>Don't forget it!</h4>
       </header>
 
-      <HashRouter>
+    <HashRouter>
       <Route path="/feeling">
         <FormItem 
           question="How are you feeling?" 
@@ -21,41 +45,44 @@ function App() {
           next="/understanding"  
           reducer="ADD_FEELING"
         />
-        </Route>
+      </Route>
 
       <Route path="/understanding">
-      <FormItem 
-        question="How well are you understanding the content?" 
-        type="number" 
-        required={true} 
-        next="/supported"
-        reducer="ADD_UNDERSTANDING"
+        <FormItem 
+          question="How well are you understanding the content?" 
+          type="number" 
+          required={true} 
+          next="/support"
+          reducer="ADD_UNDERSTANDING"
         />
       </Route>
 
-      <Route path="/supported">
-      <FormItem 
-        question="How well are you being supported?" 
-        type="number" 
-        required={true} 
-        next="/comments"
-        reducer="ADD_SUPPORTED"
-      />
+      <Route path="/support">
+        <FormItem 
+          question="How well are you being supported?" 
+          type="number" 
+          required={true} 
+          next="/comments"
+          reducer="ADD_SUPPORT"
+        />
       </Route>
 
       <Route path="/comments">
-      <FormItem 
-        question="How well are you understanding the content?" 
-        type="text" 
-        required={false} 
-        next="/review"
-        reducer="ADD_COMMENTS"
-      />
+        <FormItem 
+          question="Any comments you want to leave?" 
+          type="text" 
+          required={false} 
+          next="/review"
+          reducer="ADD_COMMENTS"
+        />
       </Route>
 
-
       <Route path="/review">
+        <Review submitFeedback={submitFeedback}/>
+      </Route>
 
+      <Route path="/submitted">
+        <SuccessMessage />
       </Route>
 
 
